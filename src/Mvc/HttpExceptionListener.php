@@ -67,7 +67,7 @@ class HttpExceptionListener extends AbstractListenerAggregate
     {
         $exception = $event->getParam('exception');
 
-        if (isset($this->exceptionMap[get_class($exception)])) {
+        if (is_object($exception) && $exception instanceof \Exception && isset($this->exceptionMap[get_class($exception)])) {
             $exception = $this->createHttpException($exception);
         }
 
